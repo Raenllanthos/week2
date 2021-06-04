@@ -1,75 +1,67 @@
 class Garage():
 
     def __init__(self,tickets, parkingSpaces):
-        #self.spaces = spaces
-        self.tickets =tickets
+        self.tickets = tickets
         self.parkingSpaces = parkingSpaces
 
+    def garageSize(self):
+        size = int(input("How big is the garage? (in whole numbers) "))
+        for x in range(1, size+1):
+            self.tickets.append(x)
+            self.parkingSpaces.append(x)
+
     def takeTicket(self, currentTickets):
-        currentTickets.update({self.tickets[0]:""})
-        print(currentTickets)
-        del self.tickets[0]
-        del self.parkingSpaces[0]
-        print(f"Available tickets: {self.tickets}\nAvailable parking spaces: {self.parkingSpaces}")
-    
-    
-    def giveBackSpace(self):
-        tickets += 1
-        parkingSpaces += 1
+        if self.tickets != []:
+            currentTickets.update({self.tickets[0]:""})
+            del self.tickets[0]
+            del self.parkingSpaces[0]
+            self.show(currentTickets)
+        else:
+            print("No more room :(")
 
     def payForParking(self, currentTickets):
-        print(currentTickets.keys())
-        ask = int(input("What is your ticket number? "))
-        print(f"Your ticket number is {ask}.")
-        ask = input("How would you like to pay? ")
+        self.show(currentTickets)
+        key = int(input("What is your ticket number? "))
+        print(f"Your ticket number is {key}.")
+        value = input("Pay in 'cash' or 'card'? ")
+        if value.lower() == "cash":
+            currentTickets[key] = "paid cash"
+        elif value.lower() == "card":
+            currentTickets[key] = "paid card"
+        else:
+            print("Incorrect Payment Type")
 
+    def show(self, currentTickets):
+        print(f"\nAvailable tickets: {sorted(self.tickets)}\nAvailable parking spaces: {sorted(self.parkingSpaces)}\nTaken spaces:")
+        print(f"{currentTickets}\n")
+
+    def leaveGarage(self, currentTickets):
+        print(currentTickets)
+        key = int(input("Pick a ticket that has been paid: "))
+        if (currentTickets[key] == "paid cash") or (currentTickets[key] == "paid card"):
+            print("You may leave")
+            self.tickets.append(key)
+            self.parkingSpaces.append(key)
+            currentTickets.pop(key)
+        else:
+            print("YOU STILL NEED TO PAY ASSHOLE")
         
-
-        
-        
-
-    def paidForParking(self):
-        tickets += 1
-        parkingSpaces += 1
-
-
-    def leaveGarage(self):
-        self.giveBackSpace(tickets, parkingSpaces)
-        print("Thank you, enjoy your day!")
-
-
 def main():
-    tickets = [1,2,3,4,5,6,7,8,9,10]
-    parkingSpaces = [1,2,3,4,5,6,7,8,9,10]
+    tickets = []
+    parkingSpaces = []
     currentTickets = {}
-    aasdf = []
+    Garage(tickets, parkingSpaces).garageSize()
     while True:
-        ask = input("What would you like to do? \n Park/pay/leave/quit? ")
+        ask = input("What would you like to do? \n Park/pay/show/leave/quit? ")
         if ask.lower() == 'park':
             Garage(tickets, parkingSpaces).takeTicket(currentTickets)
         elif ask.lower() == 'pay':
             Garage(tickets, parkingSpaces).payForParking(currentTickets)
-
-    # for ticket in tickets:
-    #     if input1 == "park":
-    #         aasdf.append(tickets[0])
-    #         del tickets[0]
-    #         del parkingSpaces[0]
-    #         print(f"tickets: {tickets}")
-    #         print(f"aasdf: {aasdf}")
-    # input1 = input("'pay' for tickey? ")
-    # for ticket in tickets:
-    #     if input1 == "pay":
-    #         tickets.append(aasdf[0])
-    #         parkingSpaces.append(aasdf[0])
-    #         # currentTickets.update({tickets[0]:  parkingSpaces)
-    #         if aasdf == []:
-    #             break
-    #         del aasdf[0]
-    #         print(f"tickets: {sorted(tickets)}")
-    #         print(f"aasdf: {aasdf}")
-    #         if aasdf == []:
-    #             break
-        
+        elif ask.lower() == 'leave':
+            Garage(tickets, parkingSpaces).leaveGarage(currentTickets)
+        elif ask.lower() == "show":
+            Garage(tickets, parkingSpaces).show(currentTickets)
+        elif ask.lower() == 'quit':
+            break
 
 main()
