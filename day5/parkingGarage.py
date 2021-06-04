@@ -1,35 +1,39 @@
 class Garage():
 
-    def __init__(self, spaces,tickets, parkingSpaces):
-        self.spaces = spaces
+    def __init__(self,tickets, parkingSpaces):
+        #self.spaces = spaces
         self.tickets =tickets
         self.parkingSpaces = parkingSpaces
 
     def takeTicket(self, currentTickets):
-        # currentTickets +=1
+        currentTickets.update({self.tickets[0]:""})
         print(currentTickets)
-        # del self.tickets[0]
-        # del self.parkingSpaces[0]
-        return f"Available tickets {self.tickets}  \n available parking spaces {self.parkingSpaces}"
+        del self.tickets[0]
+        del self.parkingSpaces[0]
+        print(f"Available tickets: {self.tickets}\nAvailable parking spaces: {self.parkingSpaces}")
     
     
-    def giveBackSpace(self, tickets, parkingSpaces):
+    def giveBackSpace(self):
         tickets += 1
         parkingSpaces += 1
 
-    def paymentMethod(self):
-        pass
+    def payForParking(self, currentTickets):
+        print(currentTickets.keys())
+        ask = int(input("What is your ticket number? "))
+        print(f"Your ticket number is {ask}.")
+        ask = input("How would you like to pay? ")
 
-    def payForParking(self, tickets, parkingSpaces):
-        self.takeTicket(self, tickets, parkingSpaces)
         
 
-    def paidForParking(self, tickets, parkingSpaces):
+        
+        
+
+    def paidForParking(self):
         tickets += 1
         parkingSpaces += 1
 
 
-    def leaveGarage(self, tickets, parkingSpaces):
+    def leaveGarage(self):
         self.giveBackSpace(tickets, parkingSpaces)
         print("Thank you, enjoy your day!")
 
@@ -39,9 +43,12 @@ def main():
     parkingSpaces = [1,2,3,4,5,6,7,8,9,10]
     currentTickets = {}
     aasdf = []
-    ask = input("What would you like to do? \n Park/pay/leave/quit?")
-    if ask.lower() == 'park':
-        Garage().takeTicket(tickets, parkingSpaces, currentTickets)
+    while True:
+        ask = input("What would you like to do? \n Park/pay/leave/quit? ")
+        if ask.lower() == 'park':
+            Garage(tickets, parkingSpaces).takeTicket(currentTickets)
+        elif ask.lower() == 'pay':
+            Garage(tickets, parkingSpaces).payForParking(currentTickets)
 
     # for ticket in tickets:
     #     if input1 == "park":
