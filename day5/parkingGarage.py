@@ -9,7 +9,7 @@ class Garage():
     def spacesInfo(self, spaces):
         tickets = spaces
         parkingSpaces = spaces
-        return spaces
+        return spaces, tickets, parkingSpaces
 
     def takeTicket(self, tickets, parkingSpaces):
         tickets -= 1
@@ -31,10 +31,13 @@ class Garage():
 
 
     def leaveGarage(self, tickets, parkingSpaces):
-        pass
+        self.giveBackSpace(tickets,parkingSpaces)
+        print('Thank you, enjoy your day!')
 
 
 def main():
-    pass
+    tickets = [1,2,3,4,5,6,7,8,9,10]
+    parkingSpaces = [1,2,3,4,5,6,7,8,9,10]
+    currentTickets = {}
 
 main()
