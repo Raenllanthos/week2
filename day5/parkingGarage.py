@@ -5,10 +5,16 @@ class Garage():
         self.parkingSpaces = parkingSpaces
 
     def garageSize(self):
-        size = int(input("How big is the garage? (in whole numbers) "))
-        for x in range(1, size+1):
-            self.tickets.append(x)
-            self.parkingSpaces.append(x)
+        while True:
+            size = int(input("How big is the garage? (1 - 100) "))
+            if (size > 0) and (size < 101):
+                for x in range(1, size+1):
+                    self.tickets.append(x)
+                    self.parkingSpaces.append(x)
+                break
+            else:
+                print("Incorrect size")
+                continue
 
     def takeTicket(self, currentTickets):
         if self.tickets != []:
