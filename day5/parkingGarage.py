@@ -58,7 +58,7 @@ def main():
     currentTickets = {}
     Garage(tickets, parkingSpaces).garageSize()
     while True:
-        ask = input("What would you like to do? \n Park/pay/show/leave/quit? ")
+        ask = input("What would you like to do?\nPark/pay/show/leave/quit? ")
         if ask.lower() == 'park':
             Garage(tickets, parkingSpaces).takeTicket(currentTickets)
         elif ask.lower() == 'pay':
@@ -69,5 +69,8 @@ def main():
             Garage(tickets, parkingSpaces).show(currentTickets)
         elif ask.lower() == 'quit':
             break
+        else:
+            print("\nThat is not okay!\n")
+            continue 
 
 main()
